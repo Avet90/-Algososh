@@ -95,7 +95,7 @@ export const StringComponent: React.FC = () => {
             name="text"
             isLimitText={true}
             maxLength={11}
-            value={values.text || ""}
+            value={values.text || undefined}
             onChange={(e) => handleChange(e)}
           />
           <Button
