@@ -16,9 +16,6 @@ export const FibonacciPage: React.FC = () => {
 
   const fibonacci = (number: number): number[] => {
     let arr: number[] = [1, 1];
-    if (number< 0 || number > 19){
-      return arr;
-    }
     for (let i = 2; i < number + 1; i++) {
       arr.push(arr[i - 1] + arr[i - 2])
     }
@@ -33,6 +30,7 @@ export const FibonacciPage: React.FC = () => {
       await timeout(SHORT_DELAY_IN_MS);
       setResultArray({ items: resultArr });
     }
+    setLoader(false);
   };
 
   const onClick = () => {
@@ -40,7 +38,6 @@ export const FibonacciPage: React.FC = () => {
     setLoader(true);
     setResultArray({ items: [] });
     renderItems(Number(values.number));
-    setLoader(false);
   };
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
@@ -61,7 +58,10 @@ export const FibonacciPage: React.FC = () => {
             text={'Рассчитать'}
             onClick={onClick}
             isLoader={loader}
-            disabled={!values.number}
+            disabled={!values.number
+              || !Number(values.number)
+              || values.number > 19 
+              || values.number < 1}
           />
         </div>
         {resultArray && (
