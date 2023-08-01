@@ -60,7 +60,7 @@ interface IQueue<T> {
   
     getSize = () => this.size;
   
-    getQueue = (): any => {
+    getQueue = (): (T | null)[] => {
       return this.container
     };
   

@@ -72,20 +72,20 @@ export const StringComponent: React.FC = () => {
         setResultArray({ items: modifiedArray });
       }
     }
+    setLoader(false);
   };
 
   const onClick = () => {
-    setValues({ text: null });
     setLoader(true);
+    setValues({ text: null });
     let result: Array<IResultObj> = [];
     if (values.text) {
       result = values.text.split("").map((value: string) => {
-        return { value, modified: false, changing: false };
+        return { value, modified: false, changing: false};
       })
     }
     setResultArray({ ...resultArray, items: result });
     swapString(result);
-    setLoader(false);
   };
   return (
     <SolutionLayout title="Строка">
@@ -95,7 +95,7 @@ export const StringComponent: React.FC = () => {
             name="text"
             isLimitText={true}
             maxLength={11}
-            value={values.text || undefined}
+            value={values.text || ''}
             onChange={(e) => handleChange(e)}
           />
           <Button

@@ -216,10 +216,10 @@ export const ListPage: React.FC = () => {
     setResultArray({ array: [...arr] });
     setEventState({ ...eventState, [buttonName]: false });
   }
+
   return (
     <SolutionLayout title="Связный список">
-
-<div className={styles.container}>
+      <div className={styles.container}>
         <div className={styles.controls}>
           <Input
             placeholder="Введите значение"
@@ -276,11 +276,12 @@ export const ListPage: React.FC = () => {
             max={list.getSize() - 1}
             value={values.index ? values.index : ""}
             onChange={(e) => {
+              const va: number | string = resultArray.array.length - 1;
               handleChange(e);
-              if (Number(e.currentTarget.value) > list.getSize() - 1) {
-                setValues({ ...values, index: list.getSize() - 1 });
+              if (Number(e.currentTarget.value) >= list.getSize() - 1) {
+                setValues({ ...values, index: va });
               }
-              if (Number(e.currentTarget.value) < 0) {
+              if (Number(e.currentTarget.value) <= 0) {
                 setValues({ ...values, index: 0 });
               }
             }}
@@ -376,7 +377,6 @@ export const ListPage: React.FC = () => {
             : null}
         </div>
       </div>
-
     </SolutionLayout>
-  );
-};
+  )
+}
