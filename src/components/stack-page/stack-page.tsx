@@ -29,19 +29,26 @@ export const StackPage: React.FC = () => {
       };
     }
     if (pushedItem) {
-      await timeout(SHORT_DELAY_IN_MS);
       stack.push(pushedItem);
       setValues({ text: '' });
       setResultArray({ array: stack.getStack() });
+      await timeout(SHORT_DELAY_IN_MS);
+      pushedItem.changing = false;
+
+
     }
     setLoader(false);
   };
 
   async function pop() {
     setLoader(true);
-    await timeout(SHORT_DELAY_IN_MS);
-    stack.pop();
-    setResultArray({ array: stack.getStack() });
+    let last = stack.peak();
+    if (last) {
+      last.changing = true;
+      await timeout(SHORT_DELAY_IN_MS);
+      stack.pop();
+      setResultArray({ array: stack.getStack() });
+    }
     setLoader(false);
   };
   return (
@@ -54,16 +61,19 @@ export const StackPage: React.FC = () => {
             maxLength={4}
             value={values.text ? values.text : ""}
             onChange={(e) => handleChange(e)}
+            data-testid="input"
           />
           <Button
             text='Добавить'
             onClick={push}
             isLoader={loader}
+            data-testid="push"
             disabled={isEmpty(values.text)} />
           <Button
             text='Удалить'
             onClick={pop}
             isLoader={loader}
+            data-testid="pop"
             disabled={!resultArray.array.length} />
           <Button
             text='Очистить'
@@ -73,10 +83,11 @@ export const StackPage: React.FC = () => {
               setResultArray({ array: stack.getStack() });
             }}
             isLoader={loader}
+            data-testid="clear"
             disabled={!resultArray.array.length} />
         </div>
         {resultArray && (
-          <div className={styles.result}>
+          <div className={styles.result} data-testid="result">
             {resultArray.array.length
               ? resultArray.array.map((item, index) => {
                 const lastIndex = resultArray.array.length - 1;
