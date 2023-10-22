@@ -1,12 +1,12 @@
-import { defaultColor } from '../../src/constants/constans';
+import { defaultColor,classCircle,testidInput, testidResult } from '../../src/constants/constans';
 
 describe('Fibonacci test',() => {
 
     beforeEach( function () {
         cy.visit('/fibonacci');
-        cy.get('[data-testid="input"]').as('input');
+        cy.get(testidInput).as('input');
         cy.get('[data-testid="button"]').as('button');
-        cy.get('[data-testid="result"]').as('result');
+        cy.get(testidResult).as('result');
     });
 
     it('Button should be disabled if input is empty', () => {
@@ -19,12 +19,12 @@ describe('Fibonacci test',() => {
         cy.get('@button').should('be.enabled').click();
         cy.get('@input').should('have.value', '');
 
-        cy.get('@result').get('div[class^="circle_circle__"]').eq(0).should('have.css', 'border', defaultColor).should('contain', '1');
+        cy.get('@result').get(classCircle).eq(0).should('have.css', 'border', defaultColor).should('contain', '1');
         cy.wait(500);
-        cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', defaultColor).should('contain', '1');
+        cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', defaultColor).should('contain', '1');
         cy.wait(500);
-        cy.get('@result').get('div[class^="circle_circle__"]').eq(2).should('have.css', 'border', defaultColor).should('contain', '2');
+        cy.get('@result').get(classCircle).eq(2).should('have.css', 'border', defaultColor).should('contain', '2');
         cy.wait(500);
-        cy.get('@result').get('div[class^="circle_circle__"]').eq(3).should('have.css', 'border', defaultColor).should('contain', '3');
+        cy.get('@result').get(classCircle).eq(3).should('have.css', 'border', defaultColor).should('contain', '3');
     })
 })

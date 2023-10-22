@@ -1,4 +1,4 @@
-import { defaultColor, changingColor } from '../../src/constants/constans';
+import { defaultColor, changingColor, classCircle, testidResult } from '../../src/constants/constans';
 
 describe('List test', () => {
   
@@ -12,7 +12,7 @@ describe('List test', () => {
       cy.get('[data-testid="deleteFromTail"]').as('deleteFromTail');
       cy.get('[data-testid="addByIndex"]').as('addByIndex');
       cy.get('[data-testid="deleteByIndex"]').as('deleteByIndex');
-      cy.get('[data-testid="result"]').as('result');
+      cy.get(testidResult).as('result');
     });
   
     it('Buttons should be disabled if input is empty', () => {
@@ -21,10 +21,10 @@ describe('List test', () => {
     });
   
     it('Initial list should be visible', () => {
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(0).should('have.css', 'border', defaultColor).should('contain', '0');
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', defaultColor).should('contain', '34');
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(2).should('have.css', 'border', defaultColor).should('contain', '8');
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(3).should('have.css', 'border', defaultColor).should('contain', '1');
+      cy.get('@result').get(classCircle).eq(0).should('have.css', 'border', defaultColor).should('contain', '0');
+      cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', defaultColor).should('contain', '34');
+      cy.get('@result').get(classCircle).eq(2).should('have.css', 'border', defaultColor).should('contain', '8');
+      cy.get('@result').get(classCircle).eq(3).should('have.css', 'border', defaultColor).should('contain', '1');
     });
   
     it('Adding to head works', () => {
@@ -32,9 +32,9 @@ describe('List test', () => {
       cy.get('@addToHead').should('be.enabled').click();
       cy.get('@valueInput').should('have.value', '');
   
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(0).should('have.css', 'border', changingColor).should('contain', 'a');
+      cy.get('@result').get(classCircle).eq(0).should('have.css', 'border', changingColor).should('contain', 'a');
       cy.wait(500);
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(0).should('have.css', 'border', defaultColor).should('contain', 'a');
+      cy.get('@result').get(classCircle).eq(0).should('have.css', 'border', defaultColor).should('contain', 'a');
     });
   
     it('Adding to tail works', () => {
@@ -42,9 +42,9 @@ describe('List test', () => {
       cy.get('@addToTail').should('be.enabled').click();
       cy.get('@valueInput').should('have.value', '');
   
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(3).should('have.css', 'border', changingColor).should('contain', 'a');
+      cy.get('@result').get(classCircle).eq(3).should('have.css', 'border', changingColor).should('contain', 'a');
       cy.wait(500);
-      cy.get('@result').get('div[class^="circle_circle__"]').last().should('have.css', 'border', defaultColor).should('contain', 'a');
+      cy.get('@result').get(classCircle).last().should('have.css', 'border', defaultColor).should('contain', 'a');
     });
   
     it('Adding by index works', () => {
@@ -53,25 +53,25 @@ describe('List test', () => {
       cy.get('@addByIndex').should('be.enabled').click();
       cy.get('@valueInput').should('have.value', '');
   
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', changingColor).should('contain', 'a');
+      cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', changingColor).should('contain', 'a');
       cy.wait(500);
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', defaultColor).should('contain', 'a');
+      cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', defaultColor).should('contain', 'a');
     });
   
     it('Deleting from head works', () => {
       cy.get('@deleteFromHead').should('be.enabled').click();
   
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', changingColor).should('contain', '0');
+      cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', changingColor).should('contain', '0');
       cy.wait(500);
-      cy.get('@result').get('div[class^="circle_circle__"]').first().should('have.css', 'border', defaultColor).should('contain', '34');
+      cy.get('@result').get(classCircle).first().should('have.css', 'border', defaultColor).should('contain', '34');
     });
   
     it('Deleting from tail works', () => {
       cy.get('@deleteFromTail').should('be.enabled').click();
   
-      cy.get('@result').get('div[class^="circle_circle__"]').last().should('have.css', 'border', changingColor).should('contain', '1');
+      cy.get('@result').get(classCircle).last().should('have.css', 'border', changingColor).should('contain', '1');
       cy.wait(500);
-      cy.get('@result').get('div[class^="circle_circle__"]').last().should('have.css', 'border', defaultColor).should('contain', '8');
+      cy.get('@result').get(classCircle).last().should('have.css', 'border', defaultColor).should('contain', '8');
     });
   
     it('Deleting by index works', () => {
@@ -79,8 +79,8 @@ describe('List test', () => {
       cy.get('@deleteByIndex').should('be.enabled').click();
       cy.get('@indexInput').should('have.value', '');
   
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', changingColor).should('contain', '34');
+      cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', changingColor).should('contain', '34');
       cy.wait(500);
-      cy.get('@result').get('div[class^="circle_circle__"]').eq(1).should('have.css', 'border', defaultColor).should('contain', '8');
+      cy.get('@result').get(classCircle).eq(1).should('have.css', 'border', defaultColor).should('contain', '8');
     });
   });
